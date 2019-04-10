@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace:该mapper.xml映射文件的 唯一标识 -->
+<mapper namespace="com.xjh.mapper.AdminMapper">
+	
+	<select id="queryAdminByAdmno" 	parameterType="int"  resultType="com.xjh.entity.Admin"  >
+		select * from admin where admno = #{admNo}
+	</select>
+	
+	<insert id="addAdmin" parameterType="com.xjh.entity.Admin" >
+		insert into admin(admno,admname,password) values(#{admNo},#{admName},#{passWord})
+	</insert>
+	
+	<update id="updatePersonByAdmno" parameterType="com.xjh.entity.Admin">
+		update admin set password=#{passWord} where admno = #{admNo}
+	</update>
+
+	<select id="checkLogin" parameterType="com.xjh.entity.Admin"  resultType="int"  >
+		select count(1) from admin where admno = #{admNo} and password = #{passWord}
+	</select>
+
+</mapper>

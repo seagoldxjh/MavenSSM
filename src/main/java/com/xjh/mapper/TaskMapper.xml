@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace:该mapper.xml映射文件的 唯一标识 -->
+<mapper namespace="com.xjh.mapper.TaskMapper">
+
+	<select id="queryAllTask" resultType="com.xjh.entity.Task"  >
+		select * from task  ORDER BY  taskid desc
+	</select>
+	
+	<select id="queryTaskById" resultType="com.xjh.entity.Task"  parameterType="int">
+		select * from task  where taskid = #{taskId}
+	</select>
+	
+	<insert id="releaseTask" parameterType="com.xjh.entity.Task">
+		<!-- insert into task(tasktitle,taskstart,taskend,taskdetails,taskcreator) values(#{tasktitle},#{taskstart},#{taskend},#{taskdetails},#{taskcreator}) -->
+		insert into task(tasktitle,taskstart,taskend,taskdetails,taskcreator) values(#{taskTitle},#{taskStart},#{taskEnd},#{taskDetails},#{taskCreator})
+	</insert>
+</mapper>

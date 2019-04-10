@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace:该mapper.xml映射文件的 唯一标识 -->
+<mapper namespace="com.xjh.mapper.TaskStuMapper">
+	
+	<select id="queryTaskStu" 	parameterType="com.xjh.entity.TaskStu"  resultType="int"  >
+		select count(*) from taskstu where taskid = #{taskId} and stuno = #{stuNo}
+	</select>
+	
+	<select id="queryTaskState" parameterType="com.xjh.entity.TaskStu"  resultType="string"  >
+		select state from taskstu where taskid = #{taskId} and stuno = #{stuNo}
+	</select>
+	
+	<insert id="insertTaskStu" parameterType="com.xjh.entity.TaskStu">
+		insert into taskstu(stuno,taskid,state) values(#{stuNo},#{taskId},#{state})
+	</insert>
+	
+	<update id="acceptTask" parameterType="com.xjh.entity.TaskStu">
+		update taskstu set state = #{state} where taskid = #{taskId} and stuno = #{stuNo}
+	</update>
+	
+	<update id="finishTask" parameterType="com.xjh.entity.TaskStu">
+		update taskstu set state = #{state},filename = #{fileNmae} where taskid = #{taskId} and stuno = #{stuNo}
+	</update>
+	
+</mapper>

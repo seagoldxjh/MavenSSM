@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace:该mapper.xml映射文件的 唯一标识 -->
+<mapper namespace="com.xjh.mapper.StudentMapper">
+	
+	<select id="queryStudentByStuno" 	parameterType="int"  resultType="com.xjh.entity.Student"  >
+		select * from student where stuno = #{stuNo}
+	</select>
+	
+	<select id="queryAllStudent" resultType="com.xjh.entity.Student"  >
+		select * from student
+	</select>
+	
+	<insert id="addStudent" parameterType="com.xjh.entity.Student" >
+		insert into student(stuno,stuname,password) values(#{stuNo},#{stuName},#{passWord})
+	</insert>
+	
+	<delete id="deleteStudentBuStuno" parameterType="int"> 
+		delete from student where stuno = #{stuNo}
+	</delete>
+	
+	<update id="updatePersonByStuno" parameterType="com.xjh.entity.Student">
+		update student set password=#{passWord} where stuno = #{stuNo}
+	</update>
+
+	<select id="checkLogin" parameterType="com.xjh.entity.Student"  resultType="int"  >
+		select count(1) from student where stuno = #{stuNo} and password = #{passWord}
+	</select>
+
+</mapper>

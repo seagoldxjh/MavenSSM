@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	<mvc:annotation-driven>
+       <mvc:message-converters>
+           <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+               <constructor-arg value="#{T(java.nio.charset.Charset).forName('UTF-8')}"/>
+               <property name="supportedMediaTypes">
+                   <list>
+                       <value>text/plain;charset=UTF-8</value>
+                       <value>text/html;charset=UTF-8</value>
+                       <value>applicaiton/javascript;charset=UTF-8</value>
+                   </list>
+               </property>
+               <property name="writeAcceptCharset"><value>false</value></property>
+           </bean>
+           <bean
+               class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+               <property name="supportedMediaTypes">
+                   <list>
+                       <value>application/json; charset=UTF-8</value>
+                       <value>application/x-www-form-urlencoded; charset=UTF-8</value>
+                   </list>
+               </property>
+           </bean>
+       </mvc:message-converters>
+       
+        </mvc:annotation-driven>
+        
+    <bean id="multipartResolver"  class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >  
+	     <property name="maxUploadSize" value="104857600"></property>      
+	     <property name="defaultEncoding" value="utf-8"></property>     
+	     <property name="maxInMemorySize" value="40960"></property>
+	 </bean>
+    
+<!-- <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.xjh.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>   -->
+
+	
+	<!-- 将控制器所在包 加入IOC容器 -->
+	<context:component-scan base-package="com.xjh.controller,com.xjh.service.impl"></context:component-scan>
+	               <!-- 文件上传bean -->
+      
+	<!-- 配置视图解析器 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/views/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+	<mvc:default-servlet-handler />
+	<!-- SPringMVC基础配置、标配 -->
+
+
+</beans>
