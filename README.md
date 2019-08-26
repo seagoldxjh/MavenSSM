@@ -1,4 +1,6 @@
 # MavenSSM
+
+## Idea不会编译java文件中的xml配置文件，需要手动添加编译
 项目打包运行配置文件未加载可在pom文件加入代码
 ```xml
 <resources>
